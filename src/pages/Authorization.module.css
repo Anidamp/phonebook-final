@@ -1,0 +1,29 @@
+.nav {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ecf0f3;
+  text-decoration: none;
+  background: #1ad1ff;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 400;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+}
+
+.link:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+.link:hover,
+.link:focus {
+  box-shadow: none;
+}

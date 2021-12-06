@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import s from './ContactForm.module.css';
 import { v4 as uuidv4 } from 'uuid';
-import { useAddContactMutation} from '../../serviceApi/Api';
+import { useAddContactMutation, useGetContactsQuery} from '../../serviceApi/Api';
 
 export default function ContactForm () {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [addNewContact] = useAddContactMutation();
+   const {data: contacts} = useGetContactsQuery();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -22,14 +23,20 @@ export default function ContactForm () {
     }
   };
 
-  const handleSubmit = e => {
+ const handleSubmit = (e) => {
     e.preventDefault();
-    const contact = {
+    const newContact = {
       name,
       number,
       id: uuidv4(),
     };
-    addNewContact(contact);
+    if (contacts!==undefined&&contacts.find(
+        (contact) => name.toLowerCase() === contact.name.toLowerCase())){
+            alert('Contact is already added !!!');
+            reset();
+            return;
+        }
+    addNewContact(newContact);
     reset();
   };
 

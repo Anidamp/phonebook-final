@@ -1,13 +1,11 @@
 import s from './Filter.module.css';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/slice';
 
 
 export default function Filter() {
-  const [filter, setFilter] = useState("");
-
-    const changeFilter = (e) => {
-    setFilter(e.currentTarget.value);
-    };
+  const value = useSelector(state => state.filter);
+  const dispatch = useDispatch();
   
   return (
     <label>
@@ -16,8 +14,8 @@ export default function Filter() {
         className={s.input}
         type="text"
         name="filter"
-        value={filter}
-        onChange={changeFilter}
+        value={value}
+        onChange={e => dispatch(setFilter(e.target.value))}
       />
     </label>
   );
